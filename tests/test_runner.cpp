@@ -1,5 +1,12 @@
+/*
+DO NOT CHANGE THIS FILE
+DO NOT CHANGE THIS FILE
+DO NOT CHANGE THIS FILE
+*/
+
 #include "tests.h"
 #include "timer.hpp"
+#include "iomanip"
 
 
 static int total_tests = 0;
@@ -41,9 +48,29 @@ int main(int argc, char* argv[]) {
     std::cout << "Running Tests\n";
     std::cout << "========================================\n";
 
-    // =============================================================================
-    // Tests
-    // =============================================================================
+    Run(test_default_ctor_deleted,       "Default ctor deleted");
+    Run(test_explicit_constructor,       "Explicit constructor");
+    Run(test_copy_constructor,           "Copy constructor");
+    Run(test_move_constructor,           "Move constructor");
+    Run(test_destructor,                 "Destructor");
+    Run(test_copy_assignment,            "Copy assignment operator");
+    Run(test_move_assignment,            "Move assignment operator");
+
+    Run(test_size_returns_value,         "size() returns value");
+    Run(test_capacity_returns_value,     "capacity() returns value");
+
+    Run(test_put_and_get_single,         "Put and get single item");
+    Run(test_get_nonexistent_returns_nullptr, "Get nonexistent returns nullptr");
+    Run(test_put_overwrites_existing,    "Put overwrites existing key");
+    Run(test_eviction_at_capacity,       "Eviction at capacity");
+    Run(test_get_promotes_node,          "Get promotes node (no evict)");
+    Run(test_contains_true,              "contains() true for existing");
+    Run(test_contains_false_after_eviction, "contains() false after eviction");
+    Run(test_put_multiple_evictions,     "Multiple sequential evictions");
+    Run(test_capacity_one,               "Capacity of 1");
+    Run(test_copy_is_independent,        "Copy is independent");
+    Run(test_move_leaves_source_empty,   "Move leaves source empty");
+
 
     // =============================================================================
     // Test Summary
