@@ -3,15 +3,19 @@
 
 // Include any headers needed here
 #include <cstdint>
-#include <type_traits>
+#include <concepts>
 #include <unordered_map>
 
 // Do Not use std::list but you can make your own if needed
 
-template <typename Key, typename Value>
+
+template <typename T>
+concept Hashable = requires(T t) {
+    { std::hash<T>{}(t) } -> std::convertible_to<std::size_t>;
+};
+
+template <Hashable Key, typename Value>
 class LRUCache {
-    static_assert(std::is_default_constructible<std::hash<Key>>::value,
-        "Key must be hashable");
 public:
     struct Node {
         Key key;
